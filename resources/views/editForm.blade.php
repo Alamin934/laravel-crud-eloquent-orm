@@ -11,30 +11,28 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        @if (session()->has('status'))
-                            <div class="alert alert-success">{{session('status')}}</div>
-                        @endif
-                        
-                        <h3>Add New Student</h3>
+                        {{-- <div class="alert alert-success">{{$msg}}</div> --}}
+                        <h3>Edit Student</h3>
                         <form method="POST">
                             @csrf
+                            @method('PUT')
                             <div class="mb-3">
                                 <label for="" class="form-label">Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $data->name }}">
                                 @error('name')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">City</label>
-                                <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}">
+                                <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ $data->city }}">
                                 @error('city')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Marks</label>
-                                <input type="text" class="form-control @error('marks') is-invalid @enderror" name="marks" value="{{ old('marks') }}">
+                                <input type="text" class="form-control @error('marks') is-invalid @enderror" name="marks" value="{{ $data->marks }}">
                                 @error('marks')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -43,31 +41,7 @@
                         </form>
                     </div>
                     <div class="col-md-6">
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                    <th>City</th>
-                                    <th>Marks</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($students as $student)
-                                    <tr>
-                                        <td>{{ $student->id }}</td>
-                                        <td>{{ $student->name }}</td>
-                                        <td>{{ $student->city }}</td>
-                                        <td>{{ $student->marks }}</td>
-                                        <td>
-                                            <a href="{{ route('edit', $student->id) }}" class="btn btn-small btn-warning">Edit</a>
-                                            <a href="{{ route('delete', $student->id) }}" class="btn btn-small btn-danger">Delete</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                        
                     </div>
                 </div>
             </div>

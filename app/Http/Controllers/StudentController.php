@@ -58,7 +58,8 @@ class StudentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $student = DB::table('students')->find($id);
+        return view('editForm', ['data' => $student]);
     }
 
     /**
@@ -66,7 +67,15 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $update = DB::table('students')
+        ->where('id', $id)
+        ->update([
+            'name'=> $request->name,
+            'city'=> $request->city,
+            'marks'=> $request->marks,
+            'updated_at'=> now(),
+        ]);
+        return redirect('/')->with(['status'=>'Data Updated Successfully']);
     }
 
     /**
