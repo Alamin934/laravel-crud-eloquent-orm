@@ -41,7 +41,7 @@ class StudentController extends Controller
             'created_at'=> now(),
             'updated_at'=> now(),
         ]);
-        return redirect()->route('home');
+        return redirect('/');
 
     }
 
@@ -74,6 +74,7 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $student = DB::table('students')->where('id',$id)->delete();
+        return redirect('/');
     }
 }

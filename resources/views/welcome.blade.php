@@ -47,6 +47,7 @@
                                     <th>Name</th>
                                     <th>City</th>
                                     <th>Marks</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,6 +57,10 @@
                                         <td>{{ $student->name }}</td>
                                         <td>{{ $student->city }}</td>
                                         <td>{{ $student->marks }}</td>
+                                        <td>
+                                            <a href="" class="btn btn-small btn-warning">Edit</a>
+                                            <a href="{{ route('delete', $student->id) }}" class="btn btn-small btn-danger">Delete</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
