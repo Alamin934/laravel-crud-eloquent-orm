@@ -11,7 +11,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = DB::table('students')->get();
+        return view('welcome', ['students' => $students]);
     }
 
     /**
@@ -27,7 +28,21 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'name'=>'required',
+            'city'=>'required',
+            'marks'=>'required',
+        ]);
+
+        $insert = DB::table('students')->insert([
+            'name'=> $request->name,
+            'city'=> $request->city,
+            'marks'=> $request->marks,
+            'created_at'=> now(),
+            'updated_at'=> now(),
+        ]);
+        return redirect()->route('home');
+
     }
 
     /**

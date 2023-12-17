@@ -11,25 +11,56 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
+                        {{-- <div class="alert alert-success">{{$msg}}</div> --}}
                         <h3>Add New Student</h3>
                         <form method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label for="" class="form-label">Name</label>
-                                <input type="text" class="form-control" name="name">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}">
+                                @error('name')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">City</label>
-                                <input type="text" class="form-control" name="city">
+                                <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}">
+                                @error('city')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Marks</label>
-                                <input type="text" class="form-control" name="marks">
+                                <input type="text" class="form-control @error('marks') is-invalid @enderror" name="marks" value="{{ old('marks') }}">
+                                @error('marks')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
-                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>City</th>
+                                    <th>Marks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($students as $student)
+                                    <tr>
+                                        <td>{{ $student->id }}</td>
+                                        <td>{{ $student->name }}</td>
+                                        <td>{{ $student->city }}</td>
+                                        <td>{{ $student->marks }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </section>
