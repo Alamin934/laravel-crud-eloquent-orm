@@ -35,6 +35,15 @@ class StudentController extends Controller
             'marks'=>'required',
         ]);
 
+        $student = new Student;
+        $student->name = $request->name;
+        $student->city = $request->city;
+        $student->marks = $request->marks;
+
+        $student->save();
+
+        return redirect('/')->with(['status'=>'Student Added Successfully']);
+
     }
 
     /**
