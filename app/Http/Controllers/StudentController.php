@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Student;
+
 class StudentController extends Controller
 {
     /**
@@ -11,7 +12,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = DB::table('students')->get();
+        $students = Student::all();
         return view('welcome', ['students' => $students]);
     }
 
@@ -34,15 +35,6 @@ class StudentController extends Controller
             'marks'=>'required',
         ]);
 
-        $insert = DB::table('students')->insert([
-            'name'=> $request->name,
-            'city'=> $request->city,
-            'marks'=> $request->marks,
-            'created_at'=> now(),
-            'updated_at'=> now(),
-        ]);
-        return redirect('/');
-
     }
 
     /**
@@ -58,8 +50,7 @@ class StudentController extends Controller
      */
     public function edit(string $id)
     {
-        $student = DB::table('students')->find($id);
-        return view('editForm', ['data' => $student]);
+        
     }
 
     /**
@@ -67,15 +58,7 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $update = DB::table('students')
-        ->where('id', $id)
-        ->update([
-            'name'=> $request->name,
-            'city'=> $request->city,
-            'marks'=> $request->marks,
-            'updated_at'=> now(),
-        ]);
-        return redirect('/')->with(['status'=>'Data Updated Successfully']);
+        
     }
 
     /**
@@ -83,7 +66,6 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        $student = DB::table('students')->where('id',$id)->delete();
-        return redirect('/');
+        
     }
 }
